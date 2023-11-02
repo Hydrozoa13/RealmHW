@@ -16,6 +16,9 @@
 		D15558F62AF37C90008C8818 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D15558F52AF37C90008C8818 /* RealmSwift */; };
 		D15558FA2AF37EDE008C8818 /* CategoriesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15558F92AF37EDE008C8818 /* CategoriesTVC.swift */; };
 		D15558FC2AF37EEB008C8818 /* TasksTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15558FB2AF37EEB008C8818 /* TasksTVC.swift */; };
+		D15558FE2AF37F91008C8818 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15558FD2AF37F91008C8818 /* CategoryModel.swift */; };
+		D15559002AF37F9C008C8818 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15558FF2AF37F9C008C8818 /* TaskModel.swift */; };
+		D15559022AF382B5008C8818 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15559012AF382B5008C8818 /* StorageManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		D15558E82AF37A49008C8818 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D15558F92AF37EDE008C8818 /* CategoriesTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTVC.swift; sourceTree = "<group>"; };
 		D15558FB2AF37EEB008C8818 /* TasksTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTVC.swift; sourceTree = "<group>"; };
+		D15558FD2AF37F91008C8818 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
+		D15558FF2AF37F9C008C8818 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
+		D15559012AF382B5008C8818 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +101,8 @@
 		D15558F02AF37BB5008C8818 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D15558FD2AF37F91008C8818 /* CategoryModel.swift */,
+				D15558FF2AF37F9C008C8818 /* TaskModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -111,6 +119,7 @@
 		D15558F72AF37CF9008C8818 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				D15559012AF382B5008C8818 /* StorageManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -200,9 +209,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D15559002AF37F9C008C8818 /* TaskModel.swift in Sources */,
 				D15558FC2AF37EEB008C8818 /* TasksTVC.swift in Sources */,
 				D15558FA2AF37EDE008C8818 /* CategoriesTVC.swift in Sources */,
+				D15559022AF382B5008C8818 /* StorageManager.swift in Sources */,
 				D15558DB2AF37A48008C8818 /* AppDelegate.swift in Sources */,
+				D15558FE2AF37F91008C8818 /* CategoryModel.swift in Sources */,
 				D15558DD2AF37A48008C8818 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
