@@ -33,7 +33,7 @@ class CategoriesTVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let category = categories[indexPath.row]
-        cell.textLabel?.text = category.name
+        cell.configure(with: category)
         return cell
     }
 

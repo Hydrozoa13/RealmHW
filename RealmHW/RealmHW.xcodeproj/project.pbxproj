@@ -19,6 +19,7 @@
 		D15558FE2AF37F91008C8818 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15558FD2AF37F91008C8818 /* CategoryModel.swift */; };
 		D15559002AF37F9C008C8818 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15558FF2AF37F9C008C8818 /* TaskModel.swift */; };
 		D15559022AF382B5008C8818 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15559012AF382B5008C8818 /* StorageManager.swift */; };
+		D1633AF12AF7A59A000614FE /* UITableViewCellExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1633AF02AF7A59A000614FE /* UITableViewCellExt.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		D15558FD2AF37F91008C8818 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		D15558FF2AF37F9C008C8818 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		D15559012AF382B5008C8818 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		D1633AF02AF7A59A000614FE /* UITableViewCellExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCellExt.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 		D15558F82AF37D03008C8818 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D1633AF02AF7A59A000614FE /* UITableViewCellExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 				D15558FA2AF37EDE008C8818 /* CategoriesTVC.swift in Sources */,
 				D15559022AF382B5008C8818 /* StorageManager.swift in Sources */,
 				D15558DB2AF37A48008C8818 /* AppDelegate.swift in Sources */,
+				D1633AF12AF7A59A000614FE /* UITableViewCellExt.swift in Sources */,
 				D15558FE2AF37F91008C8818 /* CategoryModel.swift in Sources */,
 				D15558DD2AF37A48008C8818 /* SceneDelegate.swift in Sources */,
 			);
