@@ -58,4 +58,14 @@ class StorageManager {
             print("editCategory error \(error)")
         }
     }
+    
+    static func makeAllDone(category: Category) {
+        do {
+            try realm.write {
+                category.tasks.setValue(true, forKey: "isCompleted")
+            }
+        } catch {
+            print("makeAllDone error \(error)")
+        }
+    }
 }

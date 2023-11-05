@@ -52,23 +52,29 @@ class CategoriesTVC: UITableViewController {
             self?.alertForAddAndUpdatesCategories(category: category, indexPath: indexPath)
         }
         
+        let doneAction = UIContextualAction(style: .destructive, title: "Done") { [weak self] _, _, _ in
+            StorageManager.makeAllDone(category: category)
+            self?.tableView.reloadRows(at: [indexPath], with: .none)
+        }
+        
         deleteAction.backgroundColor = .red
         editAction.backgroundColor = .lightGray
+        doneAction.backgroundColor = .green
         
-        let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
+        let swipeActions = UISwipeActionsConfiguration(actions: [doneAction, editAction, deleteAction])
         
         return swipeActions
     }
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if let vc = segue.destination as? TasksTVC,
+           let indexPath = tableView.indexPathForSelectedRow {
+            let category = categories[indexPath.row]
+            vc.category = category
+        }
     }
-    */
     
     //MARK: - Private functions
     
@@ -117,6 +123,7 @@ class CategoriesTVC: UITableViewController {
         alertController.addAction(cancelAction)
         alertController.addTextField { textField in
             alertTextField = textField
+            alertTextField.text = category?.name
             alertTextField.placeholder = "Category name"
         }
         present(alertController, animated: true)
