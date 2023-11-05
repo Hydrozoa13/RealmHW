@@ -17,7 +17,13 @@ class CategoriesTVC: UITableViewController {
         categories = StorageManager.getCategories().sorted(byKeyPath: "name")
         setupUI()
     }
-
+    
+    @IBAction func segmentedControl(_ sender: UISegmentedControl) {
+        let byKeyPath = sender.selectedSegmentIndex == 0 ? "name" : "date"
+        categories = categories.sorted(byKeyPath: byKeyPath)
+        tableView.reloadData()
+    }
+    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -31,40 +37,28 @@ class CategoriesTVC: UITableViewController {
         return cell
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { true }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let category = categories[indexPath.row]
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, _ in
+            StorageManager.deleteCategory(category: category)
+            self?.tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+        
+        let editAction = UIContextualAction(style: .destructive, title: "Edit") { [weak self] _, _, _ in
+            self?.alertForAddAndUpdatesCategories(category: category, indexPath: indexPath)
+        }
+        
+        deleteAction.backgroundColor = .red
+        editAction.backgroundColor = .lightGray
+        
+        let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
+        
+        return swipeActions
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     /*
     // MARK: - Navigation
@@ -91,22 +85,30 @@ class CategoriesTVC: UITableViewController {
         alertForAddAndUpdatesCategories()
     }
 
-    private func alertForAddAndUpdatesCategories() {
-        let title = "New category"
+    private func alertForAddAndUpdatesCategories(category: Category? = nil,
+                                                 indexPath: IndexPath? = nil) {
+        let title = category == nil ? "New category" : "Edit category"
         let message = "Please insert category name"
-        let doneButtonName = "Save"
+        let doneButtonName = category == nil ? "Save" : "Update"
         
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         var alertTextField: UITextField!
         
         let saveAction = UIAlertAction(title: doneButtonName, style: .default) { [weak self] _ in
             guard let self,
+                  let indexPath,
                   let newCategory = alertTextField.text,
                   !newCategory.isEmpty else { return }
-            let category = Category()
-            category.name = newCategory
-            StorageManager.saveCategory(category: category)
-            self.tableView.reloadData()
+            
+            if let category = category {
+                StorageManager.editCategory(category: category, newCategoryName: newCategory)
+                self.tableView.reloadRows(at: [indexPath], with: .automatic)
+            } else {
+                let category = Category()
+                category.name = newCategory
+                StorageManager.saveCategory(category: category)
+                self.tableView.reloadData()
+            }
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
@@ -117,7 +119,6 @@ class CategoriesTVC: UITableViewController {
             alertTextField = textField
             alertTextField.placeholder = "Category name"
         }
-        
         present(alertController, animated: true)
     }
 }

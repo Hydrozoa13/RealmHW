@@ -26,6 +26,18 @@ class StorageManager {
         }
     }
     
+    static func deleteCategory(category: Category) {
+        do {
+            try realm.write {
+                let tasks = category.tasks
+                realm.delete(tasks)
+                realm.delete(category)
+            }
+        } catch {
+            print("deleteCategory error \(error)")
+        }
+    }
+    
     static func saveCategory(category: Category) {
         do {
             try realm.write {
@@ -33,6 +45,17 @@ class StorageManager {
             }
         } catch {
             print("saveCategory error \(error)")
+        }
+    }
+    
+    static func editCategory(category: Category,
+                             newCategoryName: String) {
+        do {
+            try realm.write {
+                category.name = newCategoryName
+            }
+        } catch {
+            print("editCategory error \(error)")
         }
     }
 }
