@@ -104,8 +104,11 @@ class TasksTVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool { true }
     
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to : IndexPath) {
+        guard let category else { return }
+        let task = category.tasks[fromIndexPath.row]
+        let isCompleted = to.section == 0 ? false : true
+        StorageManager.isCompleted(task: task, isCompleted: isCompleted)
     }
 
     //MARK: - Private functions
@@ -120,7 +123,7 @@ class TasksTVC: UITableViewController {
         title = category?.name
         let add = UIBarButtonItem(barButtonSystemItem: .add, target: self,
                                   action: #selector(addBarButtonSystemItemSelector))
-        navigationItem.setRightBarButton(add, animated: true)
+        navigationItem.setRightBarButtonItems([editButtonItem, add], animated: true)
     }
     
     //MARK: - Obj-c
