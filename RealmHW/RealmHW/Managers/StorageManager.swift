@@ -89,4 +89,28 @@ class StorageManager {
             print("editTask error \(error)")
         }
     }
+    
+    static func deleteTask(task: Task) {
+        do {
+            try realm.write {
+                realm.delete(task)
+            }
+        } catch {
+            print("deleteTask error \(error)")
+        }
+    }
+    
+    static func changeCompletion(task: Task) {
+        do {
+            try realm.write {
+                task.isCompleted.toggle()
+            }
+        } catch {
+            print("changeCompletion error \(error)")
+        }
+    }
+    
+    static func findRealmFile() {
+        print("Realm is located at:", realm.configuration.fileURL!)
+    }
 }

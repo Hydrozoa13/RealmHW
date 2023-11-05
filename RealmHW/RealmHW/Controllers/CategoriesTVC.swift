@@ -57,9 +57,9 @@ class CategoriesTVC: UITableViewController {
             self?.tableView.reloadRows(at: [indexPath], with: .none)
         }
         
-        deleteAction.backgroundColor = .red
+        deleteAction.backgroundColor = .systemRed
         editAction.backgroundColor = .lightGray
-        doneAction.backgroundColor = .green
+        doneAction.backgroundColor = .systemGreen
         
         let swipeActions = UISwipeActionsConfiguration(actions: [doneAction, editAction, deleteAction])
         

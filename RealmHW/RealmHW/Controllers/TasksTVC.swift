@@ -74,27 +74,33 @@ class TasksTVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool { true }
     
-//    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        
-//        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, _ in
-//            self?.tableView.deleteRows(at: [indexPath], with: .fade)
-//        }
-//        
-//        let editAction = UIContextualAction(style: .destructive, title: "Edit") { [weak self] _, _, _ in
-//        }
-//        
-//        let doneAction = UIContextualAction(style: .destructive, title: "Done") { [weak self] _, _, _ in
-//            self?.tableView.reloadRows(at: [indexPath], with: .none)
-//        }
-//        
-//        deleteAction.backgroundColor = .red
-//        editAction.backgroundColor = .lightGray
-//        doneAction.backgroundColor = .green
-//        
-//        let swipeActions = UISwipeActionsConfiguration(actions: [doneAction, editAction, deleteAction])
-//        
-//        return swipeActions
-//    }
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let task = indexPath.section == 0 ? notCompletedTasks[indexPath.row] : completedTasks[indexPath.row]
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, _ in
+            StorageManager.deleteTask(task: task)
+            self?.filteringTasks()
+        }
+        
+        let editAction = UIContextualAction(style: .destructive, title: "Edit") { [weak self] _, _, _ in
+            self?.alertForAddAndUpdatesTask(tasksTVCFlow: .editingTask(task: task))
+        }
+        
+        let doneText = task.isCompleted ? "Not done" : "Done"
+        let doneAction = UIContextualAction(style: .destructive, title: doneText) { [weak self] _, _, _ in
+            StorageManager.changeCompletion(task: task)
+            self?.filteringTasks()
+        }
+        
+        deleteAction.backgroundColor = .systemRed
+        editAction.backgroundColor = .lightGray
+        doneAction.backgroundColor = doneText == "Not done" ? .systemYellow : .systemGreen
+        
+        let swipeActions = UISwipeActionsConfiguration(actions: [doneAction, editAction, deleteAction])
+        
+        return swipeActions
+    }
     
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool { true }
     
