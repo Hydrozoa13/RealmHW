@@ -107,8 +107,18 @@ class TasksTVC: UITableViewController {
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to : IndexPath) {
         let task = fromIndexPath.section == 0 ? notCompletedTasks[fromIndexPath.row] : completedTasks[fromIndexPath.row]
         let isCompleted = to.section == 0 ? false : true
+        let currentArray = fromIndexPath.section == 0 ? notCompletedTasks : completedTasks
+        
+        guard let category,
+              let count = currentArray?.count else { return }
+        var destination = to.section == 0 ? count - 1 - to.row : count - 1 + to.row
+        
+        if fromIndexPath.section == to.section {
+            destination = to.row
+        }
+        
+        StorageManager.moveTask(category: category, from: fromIndexPath.row, to: destination)
         StorageManager.isCompleted(task: task, isCompleted: isCompleted)
-        tableView.reloadData()
     }
 
     //MARK: - Private functions

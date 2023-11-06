@@ -120,6 +120,16 @@ class StorageManager {
         }
     }
     
+    static func moveTask(category: Category, from: Int, to: Int) {
+        do {
+            try realm.write {
+                category.tasks.move(from: from, to: to)
+            }
+        } catch {
+            print("moveTask error \(error)")
+        }
+    }
+    
     static func findRealmFile() {
         print("Realm is located at:", realm.configuration.fileURL!)
     }
