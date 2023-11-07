@@ -110,7 +110,11 @@ class TasksTVC: UITableViewController {
         
         guard let category else { return }
         let starting = fromIndexPath.section == 0 ? fromIndexPath.row : fromIndexPath.row + notCompletedTasks.count
-        let destination = to.section == 0 ? to.row : notCompletedTasks.count - 1 + to.row
+        var destination = to.section == 0 ? to.row : notCompletedTasks.count - 1 + to.row
+        
+        if fromIndexPath.section == to.section && fromIndexPath.section == 1 {
+            destination = notCompletedTasks.count + to.row
+        }
         
         StorageManager.moveTask(category: category, from: starting, to: destination)
         StorageManager.isCompleted(task: task, isCompleted: isCompleted)
